@@ -1,32 +1,40 @@
-def encrypt(text:str, key:int)->str :
+def encrypt(text: str, key: int) -> str:
     result = ""
+
     for char in text:
-        # Gestione delle lettere minuscole
-        if char.isalpha():
-            if char.isupper():
-            index = (ord(char) - 65 + key) % 26
-            result += chr(index + 65)
-
-            else:
-
-            index = (ord(char) - 97 + key) % 26
-            result += chr(index + 97)
+        if char.isalpha(): # Solo lettere
+            if char.isupper(): # Maiuscole
+                pos = ord(char) - 65
+                new_pos = (pos + key) % 26
+                result += chr(new_pos + 65)
+            else: # Minuscole
+                pos = ord(char) - 97
+                new_pos = (pos + key) % 26
+                result += chr(new_pos + 97)
         else:
-            # Caratteri speciali, spazi e numeri restano invariati
+
             result += char
+
     return result
 
 
 def main():
-    # Qui aggiungi la parte interattiva (input utente)
-    scelta = input("Vuoi cifrare o decifrare? ")
-    messaggio = input("Inserisci il testo: ")
-    chiave = int(input("Inserisci la (chiave numero): "))
+    #1. Scelta utente
+    scelta = input("Vuoi cifrare o decifrare? ").strip().lower()
 
-    if scelta.lower() == 'decifrare':
+    # 2. Testo
+    messaggio = input("Inserisci il testo: ")
+
+    # 3. Chiave
+    chiave = int(input("Inserisci la chiave (numero): "))
+
+    # 4. Decifrare = chiave negativa
+    if scelta == "decifrare":
         chiave = -chiave
 
-    print("Risultato:", encrypt(messaggio, chiave))
+    # 5. Output
+    risultato = encrypt(messaggio, chiave)
+    print("Risultato:", risultato)
 
 
 if __name__ == "__main__":
