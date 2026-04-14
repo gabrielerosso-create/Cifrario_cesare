@@ -17,3 +17,14 @@ def encrypt(text: str, key: int) -> str:
 
 
    return result
+
+def brute_force(ciphertext: str) -> list[tuple[int, str]]:
+   risultati = []
+
+
+   for chiave in range(26):
+       testo = encrypt(ciphertext, -chiave)
+       risultati.append((chiave, testo))
+
+
+   return risultati
